@@ -7,5 +7,6 @@
     <string name="title_activity_mark_house">Mark House</string>
     <string name="action_import">Import Data</string>
     <string name="action_export">Export Data</string>
+    <string name="title_activity_survey_house">Survey House</string>
 
 </resources>

@@ -1,25 +1,24 @@
 package com.gpshealthsurvey.gpshealthsurvey;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MarkHouse extends ActionBarActivity {
+public class SurveyHouse extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mark_house);
+        setContentView(R.layout.activity_survey_house);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_mark_house, menu);
+        getMenuInflater().inflate(R.menu.menu_survey_house, menu);
         return true;
     }
 
@@ -31,10 +30,9 @@ public class MarkHouse extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_mark_house) {
-            //PULL GPS LOCATION
-            Intent markIntent = new Intent(this,SurveyHouse.class);
-            startActivity(markIntent);
+        if (id == R.id.action_save_survey) {
+            //save survey
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

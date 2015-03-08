@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gpshealthsurvey.gpshealthsurvey.SurveyHouse">
+
+    <!--This is temporary until I can find a way to do variable height-->
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:id="@+id/houseImage"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_action_new_dark" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/houseTitle_field"
+        android:layout_below="@+id/houseImage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="house name" />
+</RelativeLayout>

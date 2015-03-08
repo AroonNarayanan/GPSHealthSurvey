@@ -24,6 +24,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gpshealthsurvey.gpshealthsurvey.HomeScreen" />
         </activity>
+        <activity
+            android:name=".SurveyHouse"
+            android:label="@string/title_activity_survey_house"
+            android:parentActivityName=".MarkHouse" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gpshealthsurvey.gpshealthsurvey.MarkHouse" />
+        </activity>
     </application>
 
 </manifest>

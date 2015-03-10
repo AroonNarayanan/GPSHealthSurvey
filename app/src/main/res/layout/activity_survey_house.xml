@@ -19,5 +19,5 @@
         android:layout_below="@+id/houseImage"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="house name" />
+        android:hint="description" />
 </RelativeLayout>

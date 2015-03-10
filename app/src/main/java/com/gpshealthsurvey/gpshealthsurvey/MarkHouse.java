@@ -1,10 +1,14 @@
 package com.gpshealthsurvey.gpshealthsurvey;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 
 public class MarkHouse extends ActionBarActivity {
@@ -13,6 +17,13 @@ public class MarkHouse extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_house);
+        locationLIBRARY locLIB = new locationLIBRARY(this);
+        locLIB.getLocation();
+        //continually request updates
+        TextView latitude = (TextView) findViewById(R.id.latitude);
+        TextView longitude = (TextView) findViewById(R.id.longitude);
+        latitude.setText(Double.toString(locLIB.getLatitude()));
+        longitude.setText(Double.toString(locLIB.getLongitude()));
     }
 
 
@@ -33,6 +44,12 @@ public class MarkHouse extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_mark_house) {
             //PULL GPS LOCATION
+            locationLIBRARY locLIB = new locationLIBRARY(this);
+            Household markedHouse = new Household();
+            locLIB.getLocation();
+            markedHouse.latitude = locLIB.getLatitude();
+            markedHouse.longitude = locLIB.getLongitude();
+
             Intent markIntent = new Intent(this,SurveyHouse.class);
             startActivity(markIntent);
         }

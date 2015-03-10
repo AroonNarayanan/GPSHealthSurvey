@@ -5,6 +5,7 @@ package com.gpshealthsurvey.gpshealthsurvey;
  */
 public class Household {
     int houseId;
+    String description;
     double latitude;
     double longitude;
     //BufferedImage pic;

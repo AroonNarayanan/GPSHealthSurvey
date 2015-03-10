@@ -8,5 +8,10 @@
     <string name="action_import">Import Data</string>
     <string name="action_export">Export Data</string>
     <string name="title_activity_survey_house">Survey House</string>
+    <string name="title_activity_sync">Sync</string>
+    <string name="sync_send">you\'re ready to send data</string>
+    <string name="sync_receive">you\'re ready to receive data</string>
+    <string name="sync_instructions">just tap the back of your device against another, tap to send when prompted, and the process will begin</string>
+    <string name="title_activity_sample_data">Sample Data</string>
 
 </resources>

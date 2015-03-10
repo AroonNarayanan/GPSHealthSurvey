@@ -32,6 +32,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gpshealthsurvey.gpshealthsurvey.MarkHouse" />
         </activity>
+        <activity
+            android:name=".Sync"
+            android:label="@string/title_activity_sync"
+            android:parentActivityName=".HomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gpshealthsurvey.gpshealthsurvey.HomeScreen" />
+        </activity>
+        <activity
+            android:name=".SampleData"
+            android:label="@string/title_activity_sample_data"
+            android:parentActivityName=".HomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gpshealthsurvey.gpshealthsurvey.HomeScreen" />
+        </activity>
     </application>
 
 </manifest>

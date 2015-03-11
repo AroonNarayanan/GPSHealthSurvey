@@ -51,6 +51,7 @@ public class MarkHouse extends ActionBarActivity {
             markedHouse.longitude = locLIB.getLongitude();
 
             Intent markIntent = new Intent(this,SurveyHouse.class);
+            markIntent.putExtra("Household",markedHouse);
             startActivity(markIntent);
         }
 

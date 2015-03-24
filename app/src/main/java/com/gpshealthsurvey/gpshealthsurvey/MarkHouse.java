@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.location.Location;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -36,8 +40,20 @@ public class MarkHouse extends ActionBarActivity {
         SampleHouseArray.add(B);
         SampleHouseArray.add(C);
 
+        //connect house listview to our sample list
+        HouseAdaptor adaptor = new HouseAdaptor(SampleHouseArray);
+        ListView houseView = (ListView) findViewById(R.id.houseList);
+        houseView.setAdapter(adaptor);
+        registerForContextMenu(houseView);
+
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu,v,menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.house_context_menu,menu);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

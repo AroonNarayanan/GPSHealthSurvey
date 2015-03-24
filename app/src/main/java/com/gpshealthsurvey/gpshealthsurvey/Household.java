@@ -22,4 +22,29 @@ public class Household implements Serializable {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    public int getHouseId() {
+        return houseId;
+    }
+    public void setHouseId(int id) {
+        this.houseId = id;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public double getLatitude() {
+        return latitude;
+    }
+    public void setLatitude(double lat) {
+        this.latitude = lat;
+    }
+    public double getLongitude() {
+        return longitude;
+    }
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 }

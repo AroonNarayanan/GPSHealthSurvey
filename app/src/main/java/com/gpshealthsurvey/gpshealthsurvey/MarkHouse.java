@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 
 public class MarkHouse extends ActionBarActivity {
 
@@ -19,11 +21,21 @@ public class MarkHouse extends ActionBarActivity {
         setContentView(R.layout.activity_mark_house);
         locationLIBRARY locLIB = new locationLIBRARY(this);
         locLIB.getLocation();
-        //continually request updates
+        //TODO: continually request updates
         TextView latitude = (TextView) findViewById(R.id.latitude);
         TextView longitude = (TextView) findViewById(R.id.longitude);
         latitude.setText(Double.toString(locLIB.getLatitude()));
         longitude.setText(Double.toString(locLIB.getLongitude()));
+
+        //sample list of households
+        ArrayList<Household> SampleHouseArray = new ArrayList<>();
+        Household A = new Household("Narayanan house",35.34090584144,-83.5612943116575);
+        Household B = new Household("Dhingra house",35.35090584144,-83.5712943116575);
+        Household C = new Household("Raffaele house",35.35090584144,-83.5812943116575);
+        SampleHouseArray.add(A);
+        SampleHouseArray.add(B);
+        SampleHouseArray.add(C);
+
     }
 
 
@@ -45,11 +57,9 @@ public class MarkHouse extends ActionBarActivity {
         if (id == R.id.action_mark_house) {
             //PULL GPS LOCATION
             locationLIBRARY locLIB = new locationLIBRARY(this);
-            Household markedHouse = new Household();
-            locLIB.getLocation();
-            markedHouse.latitude = locLIB.getLatitude();
-            markedHouse.longitude = locLIB.getLongitude();
 
+            locLIB.getLocation();
+            Household markedHouse = new Household(locLIB.getLatitude(),locLIB.getLongitude());
             Intent markIntent = new Intent(this,SurveyHouse.class);
             markIntent.putExtra("Household",markedHouse);
             startActivity(markIntent);

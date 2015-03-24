@@ -14,13 +14,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/house_thumbnail"
+        android:layout_toEndOf="@+id/house_thumbnail"
+        android:layout_centerVertical="true">
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="House Name"
-        android:id="@+id/house_name"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/house_thumbnail"
-        android:layout_toEndOf="@+id/house_thumbnail"
-        android:textSize="36sp" />
+        android:text="House Desc"
+        android:id="@+id/house_desc"
+        android:textSize="36sp"
+ />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="latitude, longitude"
+            android:id="@+id/house_loc" />
+    </LinearLayout>
 </RelativeLayout>

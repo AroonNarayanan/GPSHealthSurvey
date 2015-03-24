@@ -11,4 +11,15 @@ public class Household implements Serializable {
     double latitude;
     double longitude;
     //BufferedImage pic;
+
+    public Household(String description, double latitude, double longitude){
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+    public Household( double latitude, double longitude){
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }

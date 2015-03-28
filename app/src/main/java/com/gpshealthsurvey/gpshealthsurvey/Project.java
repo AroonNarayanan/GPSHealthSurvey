@@ -4,8 +4,8 @@ package com.gpshealthsurvey.gpshealthsurvey;
  * Created by Louis on 2/22/2015.
  */
 public class Project {
+    private long projectID;
     private String name;
-    private int projectID;
     private String description;
     private double latitude;
     private double longitude;
@@ -17,10 +17,10 @@ public class Project {
     public void setName(String name) {
         this.name = name;
     }
-    public int getProjectId() {
+    public long getProjectId() {
         return projectID;
     }
-    public void setProjectId() {
+    public void setProjectId(long projectId) {
         this.projectID = projectID;
     }
     public String getDescription() {

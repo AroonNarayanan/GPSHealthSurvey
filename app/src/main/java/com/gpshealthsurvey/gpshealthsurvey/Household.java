@@ -6,11 +6,14 @@ import java.io.Serializable;
  * Created by Louis on 2/22/2015.
  */
 public class Household implements Serializable {
-    int houseId;
+    long houseId;
     String description;
     double latitude;
     double longitude;
     //BufferedImage pic;
+
+    public Household() {
+    }
 
     public Household(String description, double latitude, double longitude){
         this.description = description;
@@ -23,10 +26,10 @@ public class Household implements Serializable {
         this.longitude = longitude;
     }
 
-    public int getHouseId() {
+    public long getHouseId() {
         return houseId;
     }
-    public void setHouseId(int id) {
+    public void setHouseId(long id) {
         this.houseId = id;
     }
     public String getDescription() {

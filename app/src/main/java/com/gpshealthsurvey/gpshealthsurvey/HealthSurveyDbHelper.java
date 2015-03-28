@@ -45,11 +45,11 @@ public class HealthSurveyDbHelper extends SQLiteOpenHelper {
         db.execSQL(
         "CREATE TABLE " + ATTRIBUTE_TABLE_NAME + " (" +
         ATTRIBUTE_COLUMN_ID + " INTEGER PRIMARY KEY," +
-        ATTRIBUTE_COLUMN_HOUSEHOLDID + " TEXT, " +
         ATTRIBUTE_COLUMN_NAME + " TEXT," +
-        ATTRIBUTE_COLUMN_SURVEYID + " TEXT," +
         ATTRIBUTE_COLUMN_TYPE + " TEXT," +
         ATTRIBUTE_COLUMN_VALUE + " TEXT," +
+        ATTRIBUTE_COLUMN_SURVEYID + " TEXT," +
+        ATTRIBUTE_COLUMN_HOUSEHOLDID + " TEXT, " +
         " );" +
         "CREATE TABLE " + HOUSEHOLD_TABLE_NAME + " (" +
         HOUSEHOLD_COLUMN_HOUSEID + " INTEGER PRIMARY KEY," +

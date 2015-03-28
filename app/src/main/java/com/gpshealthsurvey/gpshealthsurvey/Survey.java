@@ -4,15 +4,15 @@ package com.gpshealthsurvey.gpshealthsurvey;
  * Created by Louis on 2/22/2015.
  */
 public class Survey {
-    private int surveyId;
+    private long surveyId;
     private String name;
     private String xmlDescription;
     private Attribute[] attributes;
 
-    public int getSurveyId() {
+    public long getSurveyId() {
         return surveyId;
     }
-    public void setSurveyId(int id) {
+    public void setSurveyId(long id) {
         this.surveyId = id;
     }
     public String getName() {

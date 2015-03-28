@@ -6,12 +6,19 @@ import android.provider.BaseColumns;
  * Created by Louis on 2/22/2015.
  */
 public final class Attribute {
+    private long id;
     private String name;
     private String type;
     private String value;
     private int surveyId;
     private int householdId;
 
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }

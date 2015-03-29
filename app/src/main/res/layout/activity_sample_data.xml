@@ -6,7 +6,54 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.gpshealthsurvey.gpshealthsurvey.SampleData">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView android:text="sample size:" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/sampleSize" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/sampleSize"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/viewSamples"
+        android:layout_alignEnd="@+id/viewSamples"
+        android:layout_alignLeft="@+id/viewSamples"
+        android:layout_alignStart="@+id/viewSamples" />
+
+    <TextView
+        android:text="only show samples"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textSize="20sp"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="30dp" />
+
+    <ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="yes"
+        android:id="@+id/viewSamples"
+        android:enabled="true"
+        android:textOff="no"
+        android:textOn="yes"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sample Data"
+        android:id="@+id/createSamples"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/viewSamples"
+        android:layout_alignEnd="@+id/viewSamples"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

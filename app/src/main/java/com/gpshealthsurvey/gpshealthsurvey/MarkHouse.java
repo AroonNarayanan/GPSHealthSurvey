@@ -28,8 +28,8 @@ public class MarkHouse extends ActionBarActivity {
         //TODO: continually request updates
         TextView latitude = (TextView) findViewById(R.id.latitude);
         TextView longitude = (TextView) findViewById(R.id.longitude);
-        latitude.setText(Double.toString(locLIB.getLatitude()));
-        longitude.setText(Double.toString(locLIB.getLongitude()));
+        latitude.setText(String.format("%.3f", locLIB.getLatitude()));
+        longitude.setText(String.format("%.3f", locLIB.getLongitude()));
 
         //sample list of households
         ArrayList<Household> SampleHouseArray = new ArrayList<>();

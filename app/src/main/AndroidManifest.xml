@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gpshealthsurvey.gpshealthsurvey" >
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/flag"
@@ -43,6 +45,14 @@
         <activity
             android:name=".SampleData"
             android:label="@string/title_activity_sample_data"
+            android:parentActivityName=".HomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gpshealthsurvey.gpshealthsurvey.HomeScreen" />
+        </activity>
+        <activity
+            android:name=".CreateSurvey"
+            android:label="@string/title_activity_create_survey"
             android:parentActivityName=".HomeScreen" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

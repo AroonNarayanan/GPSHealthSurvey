@@ -4,14 +4,22 @@
     <string name="app_name">GPS Health Survey</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_mark_house">Mark House</string>
+    <string name="title_activity_mark_house">Places</string>
     <string name="action_import">Import Data</string>
     <string name="action_export">Export Data</string>
-    <string name="title_activity_survey_house">Survey House</string>
+    <string name="title_activity_survey_house">Survey Place</string>
     <string name="title_activity_sync">Sync</string>
     <string name="sync_send">you\'re ready to send data</string>
     <string name="sync_receive">you\'re ready to receive data</string>
     <string name="sync_instructions">just tap the back of your device against another, tap to send when prompted, and the process will begin</string>
     <string name="title_activity_sample_data">Sample Data</string>
-
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
+    <string name="navigate">Navigate</string>
+    <string name="description">description</string>
+    <string name="village">village</string>
+    <string name="add_survey">Add Survey</string>
+    <string name="save">Save</string>
+    <string name="title_activity_create_survey">Create Survey</string>
+    
 </resources>

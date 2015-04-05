@@ -21,7 +21,7 @@ public class HomeScreen extends ActionBarActivity {
 
         //Add items to home screen menu
         ArrayList<com.gpshealthsurvey.gpshealthsurvey.MenuListItem> menuItems = new ArrayList<com.gpshealthsurvey.gpshealthsurvey.MenuListItem>();
-        com.gpshealthsurvey.gpshealthsurvey.MenuListItem markWaypoint = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Mark House","mark a household with GPS","mark");
+        com.gpshealthsurvey.gpshealthsurvey.MenuListItem markWaypoint = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Places","mark a place with GPS","mark");
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem sync = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Sync","upload and download data","sync");
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem create = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Create Survey","create and modify surveys","create");
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem sample = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Sample Data","produce statistical samples from database","sample");
@@ -53,6 +53,11 @@ public class HomeScreen extends ActionBarActivity {
                     //Sample Data
                     Intent sampleIntent = new Intent(parent.getContext(),SampleData.class);
                     startActivity(sampleIntent);
+                }
+                if(position==3) {
+                    //Create Survey
+                    Intent surveyIntent = new Intent(parent.getContext(),CreateSurvey.class);
+                    startActivity(surveyIntent);
                 }
             }
         });

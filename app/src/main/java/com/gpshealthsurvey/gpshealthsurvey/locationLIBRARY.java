@@ -23,8 +23,7 @@ public class locationLIBRARY extends Service implements LocationListener {
     boolean GPSstatus = false;
 
     Location location;
-    double latitude;
-    double longitude;
+    double latitude, longitude, bearing, accuracy, altitude;
 
     private static final long MIN_DISTANCE = 10; //10 meters to have different data
     private static final long MIN_TIME = 1000 * 60 * 1; // 1 minutes intervals between updates
@@ -92,6 +91,31 @@ public class locationLIBRARY extends Service implements LocationListener {
 
         return longitude;
     }
+
+    //returns the bearing in degrees
+    public double getBearing(){
+        bearing = location.getBearing();
+        return bearing;
+    }
+
+    //returns the accuracy in meters
+    public double getAccuracy(){
+        accuracy = location.getAccuracy();
+        return accuracy;
+    }
+
+    //returns the altitude in meters if available, above the WGS 84 reference ellipsoid.
+    public double getAltitude(){
+        altitude = location.getAltitude();
+        return altitude;
+    }
+
+    //pass a float to this function
+    public void setAccuracy(float meters){
+        location.setAccuracy(meters);
+    }
+
+
 
     public boolean GPSstatus(){
         return this.GPSstatus;

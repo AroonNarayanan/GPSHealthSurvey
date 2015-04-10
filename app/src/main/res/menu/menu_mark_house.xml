@@ -2,6 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gpshealthsurvey.gpshealthsurvey.MarkHouse">s
-    <item android:id="@+id/action_mark_house" android:title="Mark House" android:icon="@drawable/ic_action_new"
+    <item android:id="@+id/action_mark_house" android:title="@string/mark_place" android:icon="@drawable/ic_action_new"
         android:orderInCategory="100" app:showAsAction="ifRoom" />
 </menu>

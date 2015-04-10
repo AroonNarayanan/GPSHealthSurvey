@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class SurveyHouse extends ActionBarActivity {
@@ -12,6 +13,15 @@ public class SurveyHouse extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_house);
+        if(savedInstanceState == null){
+            Bundle bundle = getIntent().getExtras();
+            Household selectedHouse = (Household) bundle.get("Household");
+
+            //populate fields with household properties
+            TextView houseTitle = (TextView) findViewById(R.id.houseTitle_field);
+            houseTitle.setText(selectedHouse.description);
+            TextView houseVillage = (TextView) findViewById(R.id.houseVillage_field);
+        }
     }
 
 
@@ -25,7 +35,11 @@ public class SurveyHouse extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handl    e clicks on the Home/Up button, so long
+
+
+
+
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 

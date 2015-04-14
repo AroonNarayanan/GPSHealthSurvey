@@ -20,5 +20,8 @@
         android:id="@+id/fieldView"
         android:layout_below="@+id/surveyName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:choiceMode="multipleChoiceModal"
+        android:longClickable="true"
+        android:clickable="true"
+        />
 </RelativeLayout>

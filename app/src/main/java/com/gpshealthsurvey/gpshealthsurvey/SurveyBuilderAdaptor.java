@@ -3,6 +3,7 @@ package com.gpshealthsurvey.gpshealthsurvey;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -29,6 +30,10 @@ public class SurveyBuilderAdaptor extends BaseAdapter {
 
     public void delete(int id){
         this.FieldArray.remove(id);
+    }
+
+    public void delete(Attribute attribute){
+        this.FieldArray.remove(attribute);
     }
 
     public void clear(){
@@ -61,20 +66,38 @@ public class SurveyBuilderAdaptor extends BaseAdapter {
 
         EditText FieldName = (EditText) view.findViewById(R.id.fieldName);
         Spinner desc = (Spinner) view.findViewById(R.id.fieldType);
-        Button deleteButton = (Button) view.findViewById(R.id.deleteField);
 
         //populate spinner with field type options
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(parent.getContext(),R.array.field_types,android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         desc.setAdapter(adapter);
-
-        //enable delete button
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        desc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                delete(id);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //hardcoded to predefined field types
+                if(position==0){
+                    item.setType("text");
+                }
+                if(position==1){
+                    item.setType("number");
+                }
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
         });
+        if(item.getType() != null){
+            //also hardcoded based on predefined field types
+            if("text".equals(item.getType())){
+                desc.setSelection(0);
+            }
+            if("number".equals(item.getType())){
+                desc.setSelection(0);
+            }
+        }
 
         return view;
     }

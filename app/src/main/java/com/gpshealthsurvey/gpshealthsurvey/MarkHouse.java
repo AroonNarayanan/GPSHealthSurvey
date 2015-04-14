@@ -1,7 +1,11 @@
 package com.gpshealthsurvey.gpshealthsurvey;
 
 import android.content.Intent;
+import android.content.pm.LabeledIntent;
 import android.location.Location;
+import android.net.Uri;
+import android.os.Parcel;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -16,9 +20,13 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MarkHouse extends ActionBarActivity {
+
+    //houses loaded into the ListView
+    final ArrayList<Household> SampleHouseArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +41,7 @@ public class MarkHouse extends ActionBarActivity {
         longitude.setText(String.format("%.3f", locLIB.getLongitude()));
 
         //sample list of households
-        final ArrayList<Household> SampleHouseArray = new ArrayList<>();
+
         Household A = new Household("Narayanan house",35.34090584144,-83.5612943116575);
         Household B = new Household("Dhingra house",35.35090584144,-83.5712943116575);
         Household C = new Household("Raffaele house",35.35090584144,-83.5812943116575);
@@ -81,13 +89,31 @@ public class MarkHouse extends ActionBarActivity {
         super.onCreateContextMenu(menu,v,menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.house_context_menu,menu);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_mark_house, menu);
         return true;
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        int id = item.getItemId();
+        //WARNING: this might get buggy if SampleHouseArray isn't properly kept in sync with the listview - put this in a Try{}
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Household selectedHouse = SampleHouseArray.get(menuInfo.position);
+        if(id==R.id.navigate){
+            Intent navIntent = new Intent(Intent.ACTION_VIEW);
+            Uri uri = Uri.parse("geo:0,0?q=" + Double.toString(selectedHouse.latitude) + "," + Double.toString(selectedHouse.longitude) + "("+selectedHouse.getDescription()+")");
+            navIntent.setData(uri);
+            startActivity(navIntent);
+
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override

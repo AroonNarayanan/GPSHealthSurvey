@@ -13,7 +13,8 @@
         android:id="@+id/houseImage"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/ic_action_new_dark" />
+        android:background="@drawable/ic_action_new_dark"
+        android:scaleType="matrix" />
 
     <EditText
         android:layout_width="match_parent"

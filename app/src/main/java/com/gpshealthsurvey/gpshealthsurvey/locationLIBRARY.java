@@ -100,7 +100,9 @@ public class locationLIBRARY extends Service implements LocationListener {
 
     //returns the accuracy in meters
     public double getAccuracy(){
-        accuracy = location.getAccuracy();
+        if(location != null) {
+            accuracy = location.getAccuracy();
+        }
         return accuracy;
     }
 

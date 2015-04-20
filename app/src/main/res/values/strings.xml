@@ -28,6 +28,7 @@
     <string name="survey_name">survey name</string>
     <string name="field_name">field name</string>
     <string name="delete">delete</string>
+    <string name="fetching_location">Fetching your current location...</string>
     <string-array name="field_types">
         <item>Text</item>
         <item>Number</item>

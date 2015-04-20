@@ -1,5 +1,6 @@
 package com.gpshealthsurvey.gpshealthsurvey;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.LabeledIntent;
 import android.location.Location;
@@ -14,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,13 +34,16 @@ public class MarkHouse extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_house);
-        locationLIBRARY locLIB = new locationLIBRARY(this);
-        locLIB.getLocation();
-        //TODO: continually request updates
-        TextView latitude = (TextView) findViewById(R.id.latitude);
-        TextView longitude = (TextView) findViewById(R.id.longitude);
-        latitude.setText(String.format("%.3f", locLIB.getLatitude()));
-        longitude.setText(String.format("%.3f", locLIB.getLongitude()));
+
+        getLocation();
+
+        LinearLayout statusPanel = (LinearLayout) findViewById(R.id.statusPanel);
+        statusPanel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLocation();
+            }
+        });
 
         //sample list of households
 
@@ -82,6 +87,24 @@ public class MarkHouse extends ActionBarActivity {
         });
         registerForContextMenu(houseView);
 
+    }
+
+    public void getLocation(){
+        //display location on status panel
+        ProgressDialog fetchingLocation = new ProgressDialog(this);
+        //TODO: put this in a string resource
+        fetchingLocation.setMessage("Fetching your current location...");
+        fetchingLocation.show();
+        locationLIBRARY locLIB = new locationLIBRARY(this);
+        locLIB.getLocation();
+        //TODO: continually request updates
+        TextView latitude = (TextView) findViewById(R.id.latitude);
+        TextView longitude = (TextView) findViewById(R.id.longitude);
+        TextView accuracy = (TextView) findViewById(R.id.accuracy);
+        latitude.setText(String.format("%.3f", locLIB.getLatitude()));
+        longitude.setText(String.format("%.3f", locLIB.getLongitude()));
+        accuracy.setText(String.format("%.1f", locLIB.getAccuracy()));
+        fetchingLocation.hide();
     }
 
     @Override

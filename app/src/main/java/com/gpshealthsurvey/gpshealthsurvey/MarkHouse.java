@@ -2,13 +2,9 @@ package com.gpshealthsurvey.gpshealthsurvey;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
-import android.location.Location;
 import android.net.Uri;
-import android.os.Parcel;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,13 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MarkHouse extends ActionBarActivity {
+    private HouseholdDataSource datasource;
+    private HouseAdaptor adaptor;
 
     //houses loaded into the ListView
     final ArrayList<Household> SampleHouseArray = new ArrayList<>();
@@ -34,6 +29,14 @@ public class MarkHouse extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_house);
+
+
+        // Create DataSource Object
+        datasource = new HouseholdDataSource(this);
+        datasource.open();
+        // call method in household data source to select all households and return array
+        final ArrayList<Household> SampleHouseArray2 = datasource.getAllHouseholds();
+
 
         getLocation();
 
@@ -73,20 +76,19 @@ public class MarkHouse extends ActionBarActivity {
         SampleHouseArray.add(L);
 
         //connect house listview to our sample list
-        HouseAdaptor adaptor = new HouseAdaptor(SampleHouseArray);
+        HouseAdaptor adaptor = new HouseAdaptor(SampleHouseArray2);
         ListView houseView = (ListView) findViewById(R.id.houseList);
         houseView.setAdapter(adaptor);
         houseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Household selectedHouse = SampleHouseArray.get(position);
+                Household selectedHouse = SampleHouseArray2.get(position);
                 Intent markIntent = new Intent(parent.getContext(),SurveyHouse.class);
                 markIntent.putExtra("Household",selectedHouse);
                 startActivity(markIntent);
             }
         });
         registerForContextMenu(houseView);
-
     }
 
     public void getLocation(){
@@ -160,4 +162,13 @@ public class MarkHouse extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+/*
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+
+        // update the listview
+        adaptor.notifyDataSetChanged();
+    }
+    */
 }

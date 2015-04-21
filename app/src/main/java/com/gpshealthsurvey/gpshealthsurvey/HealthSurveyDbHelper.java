@@ -3,6 +3,7 @@ package com.gpshealthsurvey.gpshealthsurvey;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Louis on 3/10/2015.
@@ -10,7 +11,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class HealthSurveyDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
+
+    //debugging
+    private static final String TAG = HealthSurveyDbHelper.class.getSimpleName();
+
+    // String to specify the database name
     public static final String DATABASE_NAME = "HealthSurveyDatabase.db";
+
+    // Strings to define the tables and the columns in each table
     public static final String ATTRIBUTE_TABLE_NAME = "attribute";
     public static final String ATTRIBUTE_COLUMN_ID = "id";
     public static final String ATTRIBUTE_COLUMN_NAME = "name";
@@ -41,37 +49,50 @@ public class HealthSurveyDbHelper extends SQLiteOpenHelper {
     public HealthSurveyDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+    @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(
+        /*db.execSQL(
         "CREATE TABLE " + ATTRIBUTE_TABLE_NAME + " (" +
         ATTRIBUTE_COLUMN_ID + " INTEGER PRIMARY KEY," +
         ATTRIBUTE_COLUMN_NAME + " TEXT," +
         ATTRIBUTE_COLUMN_TYPE + " TEXT," +
         ATTRIBUTE_COLUMN_VALUE + " TEXT," +
         ATTRIBUTE_COLUMN_SURVEYID + " TEXT," +
-        ATTRIBUTE_COLUMN_HOUSEHOLDID + " TEXT, " +
-        " );" +
+        ATTRIBUTE_COLUMN_HOUSEHOLDID + " TEXT " +
+        " );");
+        */
+        db.execSQL(
         "CREATE TABLE " + HOUSEHOLD_TABLE_NAME + " (" +
-        HOUSEHOLD_COLUMN_HOUSEID + " INTEGER PRIMARY KEY," +
+        HOUSEHOLD_COLUMN_HOUSEID + " INTEGER PRIMARY KEY autoincrement," +
         ATTRIBUTE_COLUMN_HOUSEHOLDID + " TEXT, " +
         HOUSEHOLD_COLUMN_DESCRIPTION + " TEXT," +
         HOUSEHOLD_COLUMN_LONGITUDE + " TEXT," +
-        HOUSEHOLD_COLUMN_LATITUDE + " TEXT," +
-        " );" +
+        HOUSEHOLD_COLUMN_LATITUDE + " TEXT" +
+        " );"
+        );
+        Log.d(TAG, "executed the sql query");
+        /*
+        db.execSQL(
         "CREATE TABLE " + PROJECT_TABLE_NAME + " (" +
         PROJECT_COLUMN_NAME + " INTEGER PRIMARY KEY," +
         PROJECT_COLUMN_PROJECTID + " TEXT, " +
         PROJECT_COLUMN_DESCRIPTION + " TEXT," +
         PROJECT_COLUMN_LATITUDE + " TEXT," +
-        PROJECT_COLUMN_LONGITUDE + " TEXT," +
-        " );" +
+        PROJECT_COLUMN_LONGITUDE + " TEXT" +
+        " );"
+        );
+        db.execSQL(
         "CREATE TABLE " + SURVEY_TABLE_NAME + " (" +
         SURVEY_COLUMN_SURVEYID + " INTEGER PRIMARY KEY," +
         SURVEY_COLUMN_NAME + " TEXT, " +
-        SURVEY_COLUMN_XMLDESCRIPTION + " TEXT," +
+        SURVEY_COLUMN_XMLDESCRIPTION + " TEXT" +
         " );"
         );
+        */
     }
+
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over

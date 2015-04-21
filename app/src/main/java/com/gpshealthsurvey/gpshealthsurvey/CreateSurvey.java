@@ -111,14 +111,14 @@ public class CreateSurvey extends ActionBarActivity {
             adaptor.add(attribute);
             fieldView.setAdapter(adaptor);
         }
-
+        /*
         if (id == R.id.action_clear_survey_builder){
             ListView fieldView = (ListView) findViewById(R.id.fieldView);
             SurveyBuilderAdaptor adaptor = (SurveyBuilderAdaptor) fieldView.getAdapter();
             adaptor.clear();
             fieldView.setAdapter(adaptor);
         }
-
+        */
         return super.onOptionsItemSelected(item);
     }
 }

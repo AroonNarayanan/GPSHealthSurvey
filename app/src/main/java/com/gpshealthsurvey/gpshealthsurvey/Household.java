@@ -1,6 +1,7 @@
 package com.gpshealthsurvey.gpshealthsurvey;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Created by Louis on 2/22/2015.
@@ -12,6 +13,9 @@ public class Household implements Serializable {
     double longitude;
     //BufferedImage pic;
 
+    //Random number generator
+    Random rand = new Random(5);
+
     public Household() {
     }
 
@@ -19,11 +23,13 @@ public class Household implements Serializable {
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        //this.houseId = (long) rand.nextInt(1000000);
     }
     public Household( double latitude, double longitude){
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        //this.houseId = (long) rand.nextInt(1000000);
     }
 
     public long getHouseId() {

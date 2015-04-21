@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 /**
  * Created by Louis on 3/27/2015.
  */
@@ -25,18 +27,20 @@ public class HouseholdDataSource {
     public void close() {
         dbHelper.close();
     }
-    public Household createHousehold(Household newHouse) {
+
+    // takes in a household object
+    public void createHousehold(Household newHouse) {
         ContentValues values = new ContentValues();
-        values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_HOUSEID, newHouse.getHouseId());
+        //values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_HOUSEID, newHouse.getHouseId());
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_DESCRIPTION, newHouse.getDescription());
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_LATITUDE, newHouse.getLatitude());
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_LONGITUDE, newHouse.getLongitude());
         long insertId = database.insert(HealthSurveyDbHelper.HOUSEHOLD_TABLE_NAME, null, values);
         Cursor cursor = database.query(HealthSurveyDbHelper.HOUSEHOLD_TABLE_NAME, allColumns, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_HOUSEID + " = " + insertId, null, null, null, null);
         cursor.moveToFirst();
-        Household newHousehold = cursorToHousehold(cursor);
+        //Household newHousehold = cursorToHousehold(cursor);
         cursor.close();
-        return newHousehold;
+        //return newHousehold;
     }
 
     private Household cursorToHousehold(Cursor cursor) {
@@ -53,5 +57,22 @@ public class HouseholdDataSource {
         System.out.println("Household deleted with HouseId: " + id);
         database.delete(HealthSurveyDbHelper.HOUSEHOLD_TABLE_NAME, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_HOUSEID
                 + " = " + id, null);
+    }
+
+
+    // create method to select all households
+    public ArrayList<Household> getAllHouseholds() {
+        ArrayList<Household> households = new ArrayList<Household>();
+
+        Cursor cursor = database.query(dbHelper.HOUSEHOLD_TABLE_NAME, allColumns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Household household = cursorToHousehold(cursor);
+            households.add(household);
+            cursor.moveToNext();
+        }
+        cursor.close();;
+        return households;
     }
 }

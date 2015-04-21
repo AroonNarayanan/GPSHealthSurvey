@@ -5,10 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Surface;
@@ -40,11 +38,21 @@ public Uri filePath = null;
     public int rotation = 0;
     public LinearLayout survey = null;
 
+    private Household selectedHouse = new Household();
+    private HouseholdDataSource datasource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey_house);
         if(savedInstanceState == null){
+            // Instantiate datasource
+            datasource = new HouseholdDataSource(this);
+            datasource.open();
+
+            // If this is not a first time create and rather an update use this to pull object from DB
+
+
+            // Pull object passed from previous activity
             Bundle bundle = getIntent().getExtras();
             Household selectedHouse = (Household) bundle.get("Household");
 
@@ -70,7 +78,7 @@ public Uri filePath = null;
         addSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File surveyTemplate = new File(Environment.getExternalStorageDirectory(),"survey.xml");
+                File surveyTemplate = new File(getExternalStorageDirectory(),"survey.xml");
                 if(surveyTemplate.exists()){
                     SurveyTemplate surveyTemplate1 = SurveyRenderEngine.GetSurveyFromXML(surveyTemplate);
                     LinearLayout surveyContainer = (LinearLayout) findViewById(R.id.surveyContainer);
@@ -82,7 +90,7 @@ public Uri filePath = null;
                 }
                 else{
                     //TODO: this should be a resource
-                    Toast.makeText(v.getContext(),"You need to load a Survey Template file before you can start surveying!",Toast.LENGTH_SHORT);
+                    Toast.makeText(v.getContext(), "You need to load a Survey Template file before you can start surveying!", Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -152,7 +160,7 @@ public Uri filePath = null;
                     public void onPictureTaken(byte[] data, Camera camera) {
                         //save file
                         //TODO: come up with better naming scheme
-                        File photo = new File(Environment.getExternalStorageDirectory(), "test.jpg");
+                        File photo = new File(getExternalStorageDirectory(), "test.jpg");
                         if(photo.exists()){
                             photo.delete();
                         }
@@ -207,7 +215,7 @@ public Uri filePath = null;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handl    e clicks on the Home/Up button, so long
+        // automatically handle clicks on the Home/Up button, so long
 
 
 
@@ -218,6 +226,12 @@ public Uri filePath = null;
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_survey) {
             //save survey
+            //get text from ui and save as properties
+            TextView houseTitle = (TextView) findViewById(R.id.houseTitle_field);
+            //set the title as description for the household
+            selectedHouse.setDescription(houseTitle.getText().toString());
+            //save the household object
+            datasource.createHousehold(selectedHouse);
             finish();
         }
 

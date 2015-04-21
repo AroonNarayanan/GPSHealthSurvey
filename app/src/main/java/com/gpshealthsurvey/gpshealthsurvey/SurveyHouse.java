@@ -78,7 +78,7 @@ public Uri filePath = null;
                    surveyContainer.addView(survey,0);
                    //refresh ScrollView to be able to scroll this distance
                     ScrollView mainScrollView = (ScrollView) findViewById(R.id.mainScrollView);
-                    mainScrollView.computeScroll();
+
                 }
                 else{
                     //TODO: this should be a resource

@@ -40,6 +40,8 @@ public Uri filePath = null;
 
     private Household selectedHouse = new Household();
     private HouseholdDataSource datasource;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

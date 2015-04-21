@@ -1,6 +1,8 @@
 package com.gpshealthsurvey.gpshealthsurvey;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,72 +25,16 @@ public class MarkHouse extends ActionBarActivity {
     private HouseAdaptor adaptor;
 
     //houses loaded into the ListView
-    final ArrayList<Household> SampleHouseArray = new ArrayList<>();
+    public ArrayList<Household> SampleHouseArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_house);
-
-
-        // Create DataSource Object
-        datasource = new HouseholdDataSource(this);
-        datasource.open();
-        // call method in household data source to select all households and return array
-        final ArrayList<Household> SampleHouseArray2 = datasource.getAllHouseholds();
-
-
         getLocation();
 
-        LinearLayout statusPanel = (LinearLayout) findViewById(R.id.statusPanel);
-        statusPanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getLocation();
-            }
-        });
 
-        //sample list of households
 
-        Household A = new Household("Narayanan house",35.34090584144,-83.5612943116575);
-        Household B = new Household("Dhingra house",35.35090584144,-83.5712943116575);
-        Household C = new Household("Raffaele house",35.35090584144,-83.5812943116575);
-        Household D = new Household("Williams house",35.34090584144,-83.5612943116575);
-        Household E = new Household("Paucar house",35.35090584144,-83.5712943116575);
-        Household F = new Household("Patel house",35.35090584144,-83.5812943116575);
-        Household G = new Household("Somu house",35.34090584144,-83.5612943116575);
-        Household H = new Household("Appel house",35.35090584144,-83.5712943116575);
-        Household I = new Household("Correa house",35.35090584144,-83.5812943116575);
-        Household J = new Household("Skinkle house",35.34090584144,-83.5612943116575);
-        Household K = new Household("Bannerjee house",35.35090584144,-83.5712943116575);
-        Household L = new Household("Zemel house",35.35090584144,-83.5812943116575);
-        SampleHouseArray.add(A);
-        SampleHouseArray.add(B);
-        SampleHouseArray.add(C);
-        SampleHouseArray.add(D);
-        SampleHouseArray.add(E);
-        SampleHouseArray.add(F);
-        SampleHouseArray.add(G);
-        SampleHouseArray.add(H);
-        SampleHouseArray.add(I);
-        SampleHouseArray.add(J);
-        SampleHouseArray.add(K);
-        SampleHouseArray.add(L);
-
-        //connect house listview to our sample list
-        HouseAdaptor adaptor = new HouseAdaptor(SampleHouseArray2);
-        ListView houseView = (ListView) findViewById(R.id.houseList);
-        houseView.setAdapter(adaptor);
-        houseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Household selectedHouse = SampleHouseArray2.get(position);
-                Intent markIntent = new Intent(parent.getContext(),SurveyHouse.class);
-                markIntent.putExtra("Household",selectedHouse);
-                startActivity(markIntent);
-            }
-        });
-        registerForContextMenu(houseView);
     }
 
     public void getLocation(){
@@ -105,7 +51,7 @@ public class MarkHouse extends ActionBarActivity {
         TextView accuracy = (TextView) findViewById(R.id.accuracy);
         latitude.setText(String.format("%.3f", locLIB.getLatitude()));
         longitude.setText(String.format("%.3f", locLIB.getLongitude()));
-        accuracy.setText(String.format("%.1f", locLIB.getAccuracy()));
+        accuracy.setText(String.format("%.1f", locLIB.getAccuracy()) + "m");
         fetchingLocation.hide();
     }
 
@@ -136,7 +82,27 @@ public class MarkHouse extends ActionBarActivity {
             Uri uri = Uri.parse("geo:0,0?q=" + Double.toString(selectedHouse.latitude) + "," + Double.toString(selectedHouse.longitude) + "("+selectedHouse.getDescription()+")");
             navIntent.setData(uri);
             startActivity(navIntent);
-
+        }
+        if(id==R.id.delete_place){
+            //Prompt the user with a dialog to make sure they want to delete
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            //TODO: replace these with string resources
+            builder.setMessage("Are you sure you want to delete this place?")
+                    .setTitle(R.string.delete);
+            builder.setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //delete place
+                }
+            });
+            builder.setNegativeButton(R.string.no,new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //dismiss dialog, do nothing
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
         return super.onContextItemSelected(item);
     }
@@ -162,13 +128,41 @@ public class MarkHouse extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-/*
     @Override
     public void onResume() {
         super.onResume();  // Always call the superclass method first
 
-        // update the listview
-        adaptor.notifyDataSetChanged();
+        // Create DataSource Object
+        datasource = new HouseholdDataSource(this);
+        datasource.open();
+        // call method in household data source to select all households and return array
+        SampleHouseArray = datasource.getAllHouseholds();
+
+
+
+        LinearLayout statusPanel = (LinearLayout) findViewById(R.id.statusPanel);
+        statusPanel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLocation();
+            }
+        });
+
+        //sample list of households
+
+        //connect house listview to our sample list
+        HouseAdaptor adaptor = new HouseAdaptor(SampleHouseArray);
+        ListView houseView = (ListView) findViewById(R.id.houseList);
+        houseView.setAdapter(adaptor);
+        houseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Household selectedHouse = SampleHouseArray.get(position);
+                Intent markIntent = new Intent(parent.getContext(),SurveyHouse.class);
+                markIntent.putExtra("Household",selectedHouse);
+                startActivity(markIntent);
+            }
+        });
+        registerForContextMenu(houseView);
     }
-    */
 }

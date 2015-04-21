@@ -30,6 +30,8 @@
     <string name="delete">delete</string>
     <string name="fetching_location">Fetching your current location...</string>
     <string name="action_load">Load Survey XML</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
     <string-array name="field_types">
         <item>Text</item>
         <item>Number</item>

@@ -29,6 +29,7 @@
     <string name="field_name">field name</string>
     <string name="delete">delete</string>
     <string name="fetching_location">Fetching your current location...</string>
+    <string name="action_load">Load Survey XML</string>
     <string-array name="field_types">
         <item>Text</item>
         <item>Number</item>

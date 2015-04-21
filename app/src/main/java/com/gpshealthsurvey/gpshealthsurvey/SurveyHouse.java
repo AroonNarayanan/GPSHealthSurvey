@@ -15,8 +15,12 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,6 +38,7 @@ public class SurveyHouse extends ActionBarActivity {
     public Camera mCamera = null;
 public Uri filePath = null;
     public int rotation = 0;
+    public LinearLayout survey = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +53,39 @@ public Uri filePath = null;
             houseTitle.setText(selectedHouse.description);
             TextView houseVillage = (TextView) findViewById(R.id.houseVillage_field);
         }
+
         rotation = this.getWindowManager().getDefaultDisplay()
                 .getRotation();
         final SurfaceView surfaceView = (SurfaceView) findViewById(R.id.cameraPreview);
+
+        //if view refreshes and there's an existing survey, load it
+        if(survey != null){
+            LinearLayout surveyContainer = (LinearLayout) findViewById(R.id.surveyContainer);
+            surveyContainer.addView(survey,0);
+        }
+
+        //survey rendering
+        //TODO: disable button if there's an existing survey
+        Button addSurvey = (Button) findViewById(R.id.addSurvey);
+        addSurvey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File surveyTemplate = new File(Environment.getExternalStorageDirectory(),"survey.xml");
+                if(surveyTemplate.exists()){
+                    SurveyTemplate surveyTemplate1 = SurveyRenderEngine.GetSurveyFromXML(surveyTemplate);
+                    LinearLayout surveyContainer = (LinearLayout) findViewById(R.id.surveyContainer);
+                    survey = SurveyRenderEngine.GetSurveyView(surveyTemplate1,v.getContext());
+                   surveyContainer.addView(survey,0);
+                   //refresh ScrollView to be able to scroll this distance
+                    ScrollView mainScrollView = (ScrollView) findViewById(R.id.mainScrollView);
+                    mainScrollView.computeScroll();
+                }
+                else{
+                    //TODO: this should be a resource
+                    Toast.makeText(v.getContext(),"You need to load a Survey Template file before you can start surveying!",Toast.LENGTH_SHORT);
+                }
+            }
+        });
 
         //launch camera by tapping the image
         //TODO: error when trying to take a second image

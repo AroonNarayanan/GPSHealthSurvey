@@ -33,11 +33,12 @@ public class HomeScreen extends ActionBarActivity {
         setContentView(R.layout.activity_home_screen);
 
         //Add items to home screen menu
+        //TODO: these should be string resources
         ArrayList<com.gpshealthsurvey.gpshealthsurvey.MenuListItem> menuItems = new ArrayList<com.gpshealthsurvey.gpshealthsurvey.MenuListItem>();
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem markWaypoint = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Places","mark a place with GPS","mark");
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem sync = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Sync","upload and download data","sync");
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem create = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Create Survey","create and modify surveys","create");
-        com.gpshealthsurvey.gpshealthsurvey.MenuListItem sample = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Sample Data","produce statistical samples from database","sample");
+        com.gpshealthsurvey.gpshealthsurvey.MenuListItem sample = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Sample Data","randomly sample places","sample");
         //com.gpshealthsurvey.gpshealthsurvey.MenuListItem navigate = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Navigate","navigate to a household","nav");
         menuItems.add(markWaypoint);
         menuItems.add(sync);
@@ -67,11 +68,6 @@ public class HomeScreen extends ActionBarActivity {
                     Intent sampleIntent = new Intent(parent.getContext(),SampleData.class);
                     startActivity(sampleIntent);
                 }
-                if(position==3) {
-                    //Create Survey
-                    Intent surveyIntent = new Intent(parent.getContext(),CreateSurvey.class);
-                    startActivity(surveyIntent);
-                }
             }
         });
     }
@@ -97,24 +93,24 @@ public class HomeScreen extends ActionBarActivity {
            // startActivity(settingsIntent);
 
             //super temporary:
-            FieldTemplate fieldTemplate = new FieldTemplate();
-            fieldTemplate.field_name = "testName";
-            fieldTemplate.field_type = "text";
-            fieldTemplate.field_value = "lkddad";
-
-            SurveyTemplate surveyTemplate = new SurveyTemplate();
-            ArrayList<FieldTemplate> stuff = new ArrayList<FieldTemplate>();
-            stuff.add(fieldTemplate);
-            surveyTemplate.fields = stuff;
-            surveyTemplate.name = "sjl";
-
-            Serializer serializer = new Persister();
-            File outFile = new File(Environment.getExternalStorageDirectory(),"test.xml");
-            try {
-                serializer.write(surveyTemplate,outFile);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            FieldTemplate fieldTemplate = new FieldTemplate();
+//            fieldTemplate.field_name = "testName";
+//            fieldTemplate.field_type = "text";
+//            fieldTemplate.field_value = "lkddad";
+//
+//            SurveyTemplate surveyTemplate = new SurveyTemplate();
+//            ArrayList<FieldTemplate> stuff = new ArrayList<FieldTemplate>();
+//            stuff.add(fieldTemplate);
+//            surveyTemplate.fields = stuff;
+//            surveyTemplate.name = "sjl";
+//
+//            Serializer serializer = new Persister();
+//            File outFile = new File(Environment.getExternalStorageDirectory(),"test.xml");
+//            try {
+//                serializer.write(surveyTemplate,outFile);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
 
         }
 
@@ -126,6 +122,10 @@ public class HomeScreen extends ActionBarActivity {
             if (loadIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(loadIntent, REQUEST_IMAGE_GET);
             }
+        }
+
+        if (id == R.id.action_export){
+            
         }
 
         return super.onOptionsItemSelected(item);

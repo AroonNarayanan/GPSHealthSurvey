@@ -64,17 +64,19 @@ public class SurveyHouse extends ActionBarActivity {
             houseTitle.setText(selectedHouse.description);
             TextView houseVillage = (TextView) findViewById(R.id.houseVillage_field);
             houseVillage.setText(selectedHouse.villageName);
+            //get Survey
+            if(selectedHouse.surveyXML!=null) {
+                SurveyTemplate surveyTemplate1 = SurveyRenderEngine.GetSurveyFromXML(selectedHouse.surveyXML);
+                LinearLayout surveyContainer = (LinearLayout) findViewById(R.id.surveyContainer);
+                survey = SurveyRenderEngine.GetSurveyView(surveyTemplate1, this);
+                surveyContainer.addView(survey, 0);
+            }
         }
 
         rotation = this.getWindowManager().getDefaultDisplay()
                 .getRotation();
         final SurfaceView surfaceView = (SurfaceView) findViewById(R.id.cameraPreview);
 
-        //if view refreshes and there's an existing survey, load it
-        if(survey != null){
-            LinearLayout surveyContainer = (LinearLayout) findViewById(R.id.surveyContainer);
-            surveyContainer.addView(survey,0);
-        }
 
         //survey rendering
         //TODO: disable button if there's an existing survey
@@ -87,10 +89,11 @@ public class SurveyHouse extends ActionBarActivity {
                     SurveyTemplate surveyTemplate1 = SurveyRenderEngine.GetSurveyFromXML(surveyTemplate);
                     LinearLayout surveyContainer = (LinearLayout) findViewById(R.id.surveyContainer);
                     survey = SurveyRenderEngine.GetSurveyView(surveyTemplate1,v.getContext());
+                    surveyContainer.removeAllViews();
                    surveyContainer.addView(survey,0);
                    //refresh ScrollView to be able to scroll this distance
                     ScrollView mainScrollView = (ScrollView) findViewById(R.id.mainScrollView);
-
+                    mainScrollView.computeScroll();
                 }
                 else{
                     //TODO: this should be a resource
@@ -233,12 +236,20 @@ public class SurveyHouse extends ActionBarActivity {
             //get text from ui and save as properties
             TextView houseTitle = (TextView) findViewById(R.id.houseTitle_field);
             TextView villageTitle = (TextView) findViewById(R.id.houseVillage_field);
+            LinearLayout surveyContainer = (LinearLayout) findViewById(R.id.surveyContainer);
+            LinearLayout surveyView = (LinearLayout) surveyContainer.getChildAt(0);
             //set the title as description for the household
             selectedHouse.setDescription(houseTitle.getText().toString());
             selectedHouse.setVillageName(villageTitle.getText().toString());
 
             //Use this line to set the survey xml. It takes in a string
-            //selectedHouse.setSurveyXML();
+            try {
+                if(surveyView!=null) {
+                    selectedHouse.setSurveyXML(SurveyRenderEngine.GetSurveyXML(surveyView));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             // Update if object already exists in database and create new if doesn't (based on ID)
             if(selectedHouse.houseId == 0) {

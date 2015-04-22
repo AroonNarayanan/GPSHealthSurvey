@@ -37,7 +37,7 @@ public class HouseholdDataSource {
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_LATITUDE, newHouse.getLatitude());
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_LONGITUDE, newHouse.getLongitude());
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_VILLAGE, newHouse.getVillageName());
-        values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_SURVEYXML, newHouse.getVillageName());
+        values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_SURVEYXML, newHouse.getSurveyXML());
         long insertId = database.insert(HealthSurveyDbHelper.HOUSEHOLD_TABLE_NAME, null, values);
         Cursor cursor = database.query(HealthSurveyDbHelper.HOUSEHOLD_TABLE_NAME, allColumns, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_HOUSEID + " = " + insertId, null, null, null, null);
         cursor.moveToFirst();

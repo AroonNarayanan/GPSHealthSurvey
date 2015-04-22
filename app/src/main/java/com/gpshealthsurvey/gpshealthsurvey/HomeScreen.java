@@ -13,10 +13,12 @@ import android.widget.ListView;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 
@@ -122,7 +124,28 @@ public class HomeScreen extends ActionBarActivity {
         }
 
         if (id == R.id.action_export){
-            
+            //TODO: specify file location
+            File file = new File(Environment.getExternalStorageDirectory(),"output.csv");
+            if(file.exists()){
+                file.delete();
+            }
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                OutputStreamWriter osw = new OutputStreamWriter(fos);
+                HouseholdDataSource datasource = new HouseholdDataSource(this);
+                datasource.open();
+                // call method in household data source to select all households and return array
+                ArrayList<Household> households = datasource.getAllHouseholds();
+                osw.write(CSVSerializer.createCSVstring(households));
+                osw.flush();
+                osw.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return super.onOptionsItemSelected(item);

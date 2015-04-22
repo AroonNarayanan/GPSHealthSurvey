@@ -76,7 +76,7 @@ public class MarkHouse extends ActionBarActivity {
         int id = item.getItemId();
         //WARNING: this might get buggy if SampleHouseArray isn't properly kept in sync with the listview - put this in a Try{}
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Household selectedHouse = SampleHouseArray.get(menuInfo.position);
+        final Household selectedHouse = SampleHouseArray.get(menuInfo.position);
         if(id==R.id.navigate){
             Intent navIntent = new Intent(Intent.ACTION_VIEW);
             Uri uri = Uri.parse("geo:0,0?q=" + Double.toString(selectedHouse.latitude) + "," + Double.toString(selectedHouse.longitude) + "("+selectedHouse.getDescription()+")");
@@ -93,6 +93,7 @@ public class MarkHouse extends ActionBarActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //delete place
+                    datasource.deleteHousehold(selectedHouse);
                 }
             });
             builder.setNegativeButton(R.string.no,new DialogInterface.OnClickListener() {

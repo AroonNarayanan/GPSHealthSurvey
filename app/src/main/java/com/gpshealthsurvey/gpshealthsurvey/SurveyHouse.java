@@ -34,12 +34,13 @@ public class SurveyHouse extends ActionBarActivity {
     //maybe we should find a better directory
     static final Uri mLocationForPhotos = Uri.parse(getExternalStorageDirectory().toString());
     public Camera mCamera = null;
-public Uri filePath = null;
+    public Uri filePath = null;
     public int rotation = 0;
     public LinearLayout survey = null;
 
     private Household selectedHouse = new Household();
     private HouseholdDataSource datasource;
+
 
 
     @Override
@@ -56,12 +57,13 @@ public Uri filePath = null;
 
             // Pull object passed from previous activity
             Bundle bundle = getIntent().getExtras();
-            Household selectedHouse = (Household) bundle.get("Household");
+            selectedHouse = (Household) bundle.get("Household");
 
             //populate fields with household properties passed in from intent
             TextView houseTitle = (TextView) findViewById(R.id.houseTitle_field);
             houseTitle.setText(selectedHouse.description);
             TextView houseVillage = (TextView) findViewById(R.id.houseVillage_field);
+            houseVillage.setText(selectedHouse.villageName);
         }
 
         rotation = this.getWindowManager().getDefaultDisplay()
@@ -227,13 +229,26 @@ public Uri filePath = null;
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_survey) {
-            //save survey
+            //save survey and house to database
             //get text from ui and save as properties
             TextView houseTitle = (TextView) findViewById(R.id.houseTitle_field);
+            TextView villageTitle = (TextView) findViewById(R.id.houseVillage_field);
             //set the title as description for the household
             selectedHouse.setDescription(houseTitle.getText().toString());
-            //save the household object
-            datasource.createHousehold(selectedHouse);
+            selectedHouse.setVillageName(villageTitle.getText().toString());
+
+            //Use this line to set the survey xml. It takes in a string
+            //selectedHouse.setSurveyXML();
+
+            // Update if object already exists in database and create new if doesn't (based on ID)
+            if(selectedHouse.houseId == 0) {
+                //create the household object in database
+                datasource.createHousehold(selectedHouse);
+            }
+            else {
+                //update the household object in database
+                datasource.updateHousehold(selectedHouse);
+            }
             finish();
         }
 

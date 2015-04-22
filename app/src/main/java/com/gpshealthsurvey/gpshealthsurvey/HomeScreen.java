@@ -2,17 +2,14 @@ package com.gpshealthsurvey.gpshealthsurvey;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -88,7 +85,7 @@ public class HomeScreen extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        //if (id == R.id.action_settings) {
            // Intent settingsIntent = new Intent(this,SettingsActivity.class);
            // startActivity(settingsIntent);
 
@@ -112,7 +109,7 @@ public class HomeScreen extends ActionBarActivity {
 //                e.printStackTrace();
 //            }
 
-        }
+       // }
 
         //import survey XML
         //TODO: make survey XML template persist

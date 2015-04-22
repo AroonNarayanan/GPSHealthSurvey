@@ -11,6 +11,9 @@ public class Household implements Serializable {
     String description;
     double latitude;
     double longitude;
+    String villageName;
+    String surveyXML;
+
     //BufferedImage pic;
 
     //Random number generator
@@ -56,4 +59,8 @@ public class Household implements Serializable {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+    public String getVillageName() {return villageName;}
+    public void setVillageName(String _villageName) {this.villageName = _villageName;}
+    public String getSurveyXML() {return surveyXML;}
+    public void setSurveyXML(String _surveyXML) {this.surveyXML = _surveyXML;}
 }

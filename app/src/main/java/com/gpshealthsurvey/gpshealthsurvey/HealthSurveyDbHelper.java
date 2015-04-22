@@ -32,6 +32,8 @@ public class HealthSurveyDbHelper extends SQLiteOpenHelper {
     public static final String HOUSEHOLD_COLUMN_DESCRIPTION = "description";
     public static final String HOUSEHOLD_COLUMN_LONGITUDE = "longitude";
     public static final String HOUSEHOLD_COLUMN_LATITUDE = "latitude";
+    public static final String HOUSEHOLD_COLUMN_VILLAGE = "village";
+    public static final String HOUSEHOLD_COLUMN_SURVEYXML = "surveyXML";
 
     public static final String PROJECT_TABLE_NAME = "project";
     public static final String PROJECT_COLUMN_NAME = "name";
@@ -68,7 +70,9 @@ public class HealthSurveyDbHelper extends SQLiteOpenHelper {
         ATTRIBUTE_COLUMN_HOUSEHOLDID + " TEXT, " +
         HOUSEHOLD_COLUMN_DESCRIPTION + " TEXT," +
         HOUSEHOLD_COLUMN_LONGITUDE + " TEXT," +
-        HOUSEHOLD_COLUMN_LATITUDE + " TEXT" +
+        HOUSEHOLD_COLUMN_LATITUDE + " TEXT," +
+        HOUSEHOLD_COLUMN_VILLAGE + " TEXT," +
+        HOUSEHOLD_COLUMN_SURVEYXML + " TEXT" +
         " );"
         );
         Log.d(TAG, "executed the sql query");

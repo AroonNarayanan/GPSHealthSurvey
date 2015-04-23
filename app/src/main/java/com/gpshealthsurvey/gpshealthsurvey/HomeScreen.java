@@ -36,13 +36,13 @@ public class HomeScreen extends ActionBarActivity {
         ArrayList<com.gpshealthsurvey.gpshealthsurvey.MenuListItem> menuItems = new ArrayList<com.gpshealthsurvey.gpshealthsurvey.MenuListItem>();
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem markWaypoint = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Places","mark a place with GPS","mark");
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem sync = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Sync","upload and download data","sync");
-        com.gpshealthsurvey.gpshealthsurvey.MenuListItem create = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Create Survey","create and modify surveys","create");
+        //com.gpshealthsurvey.gpshealthsurvey.MenuListItem create = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Create Survey","create and modify surveys","create");
         com.gpshealthsurvey.gpshealthsurvey.MenuListItem sample = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Sample Data","randomly sample places","sample");
         //com.gpshealthsurvey.gpshealthsurvey.MenuListItem navigate = new com.gpshealthsurvey.gpshealthsurvey.MenuListItem("Navigate","navigate to a household","nav");
         menuItems.add(markWaypoint);
         menuItems.add(sync);
         menuItems.add(sample);
-        menuItems.add(create);
+        //menuItems.add(create);
         //menuItems.add(navigate);
 
         //Attach menu items to click listeners

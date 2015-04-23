@@ -3,6 +3,7 @@ package com.gpshealthsurvey.gpshealthsurvey;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
@@ -64,6 +65,17 @@ public class SurveyHouse extends ActionBarActivity {
             houseTitle.setText(selectedHouse.description);
             TextView houseVillage = (TextView) findViewById(R.id.houseVillage_field);
             houseVillage.setText(selectedHouse.villageName);
+
+            //find image file and display it
+            Bitmap bm = BitmapFactory.decodeFile(getExternalStorageDirectory().getPath() + "/" + Long.toString(selectedHouse.houseId) + ".jpg");
+            if (bm!=null) {
+                ImageView houseImage = (ImageView) findViewById(R.id.houseImage);
+                ///rotate photo
+                Matrix matrix = new Matrix();
+                matrix.preRotate(90);
+                Bitmap adjustedBitmap = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+                houseImage.setImageBitmap(adjustedBitmap);
+            }
             //get Survey
             if(selectedHouse.surveyXML!=null) {
                 SurveyTemplate surveyTemplate1 = SurveyRenderEngine.GetSurveyFromXML(selectedHouse.surveyXML);
@@ -166,8 +178,8 @@ public class SurveyHouse extends ActionBarActivity {
                     @Override
                     public void onPictureTaken(byte[] data, Camera camera) {
                         //save file
-                        //TODO: come up with better naming scheme
-                        File photo = new File(getExternalStorageDirectory(), "test.jpg");
+                        //TODO: put in isolated directory
+                        File photo = new File(getExternalStorageDirectory(), Long.toString(selectedHouse.houseId) + ".jpg");
                         if(photo.exists()){
                             photo.delete();
                         }
@@ -190,7 +202,11 @@ public class SurveyHouse extends ActionBarActivity {
                         //set thumbnail
                         if(filePath != null){
                             Bitmap bm = BitmapFactory.decodeFile(photo.getPath());
-                            houseImage.setImageBitmap(bm);
+                            ///rotate photo
+                            Matrix matrix = new Matrix();
+                            matrix.preRotate(90);
+                            Bitmap adjustedBitmap = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+                            houseImage.setImageBitmap(adjustedBitmap);
                         }
 
                     }

@@ -1,7 +1,9 @@
 <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:gravity="bottom"
-    tools:context="com.gpshealthsurvey.gpshealthsurvey.MarkHouse">
+    tools:context="com.gpshealthsurvey.gpshealthsurvey.MarkHouse"
+    sothree:umanoPanelHeight="50dp">
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,59 +14,51 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
     </RelativeLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_height="match_parent"        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/statusPanel"
-        android:layout_margin="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="latitude: "
-            android:id="@+id/latitudeLabel"
-            android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/latitude"
-            android:textSize="16sp" />
+            android:id="@+id/statusPanel"
+            android:layout_margin="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="longitude: "
-            android:id="@+id/longitudeLabel"
-            android:textSize="16sp"
-            android:layout_marginLeft="5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/longitude"
-            android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/latitude"
+                android:textSize="20sp"
+                android:text="lat" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="accuracy: "
-            android:id="@+id/accuracyLabel"
-            android:textSize="16sp"
-            android:layout_marginLeft="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/longitude"
+                android:textSize="20sp"
+                android:text="long"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/latitude"
+                android:layout_toEndOf="@+id/latitude"
+                android:layout_marginLeft="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/accuracy"
-            android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/accuracy"
+                android:textSize="20sp"
+                android:text="acc"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
     </LinearLayout>
 
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

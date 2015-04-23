@@ -20,7 +20,9 @@
         android:id="@+id/sampleSize"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/createSamples"
-        android:layout_alignEnd="@+id/createSamples" />
+        android:layout_alignEnd="@+id/createSamples"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
 
 <!--    <TextView
         android:text="only show samples"

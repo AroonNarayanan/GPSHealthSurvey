@@ -25,15 +25,20 @@ public class SurveyRenderEngine {
          ArrayList<FieldTemplate> attributes = survey.fields;
         LinearLayout surveyLayout = new LinearLayout(context);
         surveyLayout.setOrientation(LinearLayout.VERTICAL);
+        //ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        //surveyLayout.setLayoutParams(layoutParams);
         for (FieldTemplate attribute: attributes){
             switch (attribute.field_type){
                 //TODO: make these more robust and suck less
                 case "text":
                     LinearLayout textView = new LinearLayout(context);
+                    //ViewGroup.LayoutParams layoutParamsText = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    //textView.setLayoutParams(layoutParamsText);
                     textView.setOrientation(LinearLayout.HORIZONTAL);
                     TextView text_field_label = new TextView(context);
                     text_field_label.setText(attribute.field_name);
                     EditText text_field = new EditText(context);
+                    ///text_field.setLayoutParams(layoutParamsText);
                     text_field.setText(attribute.field_value);
                     textView.addView(text_field_label);
                     textView.addView(text_field);
@@ -41,10 +46,13 @@ public class SurveyRenderEngine {
                     break;
                 case "number":
                     LinearLayout numView = new LinearLayout(context);
+                    //LinearLayout.LayoutParams layoutParamsNum = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    //numView.setLayoutParams(layoutParamsNum);
                     numView.setOrientation(LinearLayout.HORIZONTAL);
                     TextView num_field_label = new TextView(context);
                     num_field_label.setText(attribute.field_name);
                     EditText num_field = new EditText(context);
+                    //num_field.setLayoutParams(layoutParamsNum);
                     num_field.setText(attribute.field_value);
                     numView.addView(num_field_label);
                     numView.addView(num_field);

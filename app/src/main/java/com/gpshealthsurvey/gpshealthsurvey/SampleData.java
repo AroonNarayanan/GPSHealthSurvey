@@ -1,9 +1,15 @@
 package com.gpshealthsurvey.gpshealthsurvey;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 
 public class SampleData extends ActionBarActivity {
@@ -12,6 +18,20 @@ public class SampleData extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_data);
+
+        final EditText sampleSize = (EditText) findViewById(R.id.sampleSize);
+        Button createSamples = (Button) findViewById(R.id.createSamples);
+        createSamples.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HouseholdDataSource dataSource = new HouseholdDataSource(v.getContext());
+                int numSamples = Integer.parseInt(sampleSize.getText().toString());
+                ArrayList<Household> households = dataSource.getRandomHouseholds(numSamples);
+                Intent markIntent = new Intent(v.getContext(), MarkHouse.class);
+                markIntent.putExtra("samples", households);
+                startActivity(markIntent);
+            }
+        });
     }
 
 

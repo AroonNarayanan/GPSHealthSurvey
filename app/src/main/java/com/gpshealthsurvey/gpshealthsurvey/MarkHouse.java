@@ -26,6 +26,7 @@ public class MarkHouse extends ActionBarActivity {
 
     //houses loaded into the ListView
     public ArrayList<Household> SampleHouseArray = new ArrayList<>();
+    public boolean sampledList = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,22 @@ public class MarkHouse extends ActionBarActivity {
         setContentView(R.layout.activity_mark_house);
         getLocation();
 
+        if (savedInstanceState == null){
+            // Pull object passed from previous activity
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null){
+            ArrayList<Household> households = (ArrayList<Household>) bundle.get("samples");
+                sampledList = true;
+                MenuItem add = (MenuItem) findViewById(R.id.action_mark_house);
+                add.setEnabled(false);
+                HouseAdaptor adaptor = new HouseAdaptor(households);
+                ListView houseView = (ListView) findViewById(R.id.houseList);
 
+                houseView.setAdapter(adaptor);
+                registerForContextMenu(houseView);
+            }
+
+        }
 
     }
 
@@ -138,6 +154,12 @@ public class MarkHouse extends ActionBarActivity {
     public void onResume() {
         super.onResume();  // Always call the superclass method first
 
+        if(!sampledList) {
+            sourceHouses();
+        }
+    }
+
+    public void sourceHouses(){
         // Create DataSource Object
         datasource = new HouseholdDataSource(this);
         datasource.open();
@@ -145,20 +167,19 @@ public class MarkHouse extends ActionBarActivity {
         SampleHouseArray = datasource.getAllHouseholds();
 
 
-
-
         //sample list of households
 
         //connect house listview to our sample list
         HouseAdaptor adaptor = new HouseAdaptor(SampleHouseArray);
         ListView houseView = (ListView) findViewById(R.id.houseList);
+
         houseView.setAdapter(adaptor);
         houseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Household selectedHouse = SampleHouseArray.get(position);
-                Intent markIntent = new Intent(parent.getContext(),SurveyHouse.class);
-                markIntent.putExtra("Household",selectedHouse);
+                Intent markIntent = new Intent(parent.getContext(), SurveyHouse.class);
+                markIntent.putExtra("Household", selectedHouse);
                 startActivity(markIntent);
             }
         });

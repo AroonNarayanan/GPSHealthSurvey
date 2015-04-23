@@ -19,12 +19,10 @@
         android:ems="10"
         android:id="@+id/sampleSize"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/viewSamples"
-        android:layout_alignEnd="@+id/viewSamples"
-        android:layout_alignLeft="@+id/viewSamples"
-        android:layout_alignStart="@+id/viewSamples" />
+        android:layout_alignRight="@+id/createSamples"
+        android:layout_alignEnd="@+id/createSamples" />
 
-    <TextView
+<!--    <TextView
         android:text="only show samples"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,17 +41,17 @@
         android:textOn="yes"
         android:layout_alignBottom="@+id/textView2"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true" />-->
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sample Data"
         android:id="@+id/createSamples"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/viewSamples"
-        android:layout_alignEnd="@+id/viewSamples"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <!--android:layout_alignRight="@+id/viewSamples"-->
+    <!--android:layout_alignEnd="@+id/viewSamples"-->
 
 </RelativeLayout>

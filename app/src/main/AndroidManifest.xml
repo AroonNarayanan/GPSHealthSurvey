@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".HomeScreen"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +22,8 @@
         <activity
             android:name=".MarkHouse"
             android:label="@string/title_activity_mark_house"
-            android:parentActivityName=".HomeScreen" >
+            android:parentActivityName=".HomeScreen" android:configChanges="orientation"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gpshealthsurvey.gpshealthsurvey.HomeScreen" />
@@ -29,7 +31,8 @@
         <activity
             android:name=".SurveyHouse"
             android:label="@string/title_activity_survey_house"
-            android:parentActivityName=".MarkHouse" >
+            android:parentActivityName=".MarkHouse" android:configChanges="orientation"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gpshealthsurvey.gpshealthsurvey.MarkHouse" />
@@ -37,7 +40,8 @@
         <activity
             android:name=".Sync"
             android:label="@string/title_activity_sync"
-            android:parentActivityName=".HomeScreen" >
+            android:parentActivityName=".HomeScreen" android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gpshealthsurvey.gpshealthsurvey.HomeScreen" />
@@ -45,7 +49,8 @@
         <activity
             android:name=".SampleData"
             android:label="@string/title_activity_sample_data"
-            android:parentActivityName=".HomeScreen" >
+            android:parentActivityName=".HomeScreen" android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gpshealthsurvey.gpshealthsurvey.HomeScreen" />
@@ -53,7 +58,8 @@
         <activity
             android:name=".CreateSurvey"
             android:label="@string/title_activity_create_survey"
-            android:parentActivityName=".HomeScreen" >
+            android:parentActivityName=".HomeScreen" android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gpshealthsurvey.gpshealthsurvey.HomeScreen" />

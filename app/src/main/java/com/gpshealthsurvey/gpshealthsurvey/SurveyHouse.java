@@ -124,7 +124,7 @@ public class SurveyHouse extends ActionBarActivity {
                             case Surface.ROTATION_180: degrees = 180; break;
                             case Surface.ROTATION_270: degrees = 270; break;
                         }
-                        mCamera.setDisplayOrientation((info.orientation - degrees + 360) % 360);
+                        mCamera.setDisplayOrientation(90);
 
                         SurfaceHolder holder = surfaceView.getHolder();
                         holder.addCallback(new SurfaceHolder.Callback() {

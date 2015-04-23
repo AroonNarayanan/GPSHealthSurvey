@@ -8,16 +8,19 @@ import java.util.Random;
  */
 public class Household implements Serializable {
     long houseId;
+    //String uID;
     String description;
     double latitude;
     double longitude;
     String villageName;
     String surveyXML;
+    int randomNum;
 
     //BufferedImage pic;
 
     //Random number generator
-    Random rand = new Random(5);
+    private Random rand = new Random();
+    //private Installation installation = new Installation();
 
     public Household() {
     }
@@ -26,13 +29,15 @@ public class Household implements Serializable {
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
-        //this.houseId = (long) rand.nextInt(1000000);
+        this.randomNum = rand.nextInt(1000000);
+        //this.uID = Installation.id(this.getApplicationContext());
+
     }
     public Household( double latitude, double longitude){
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
-        //this.houseId = (long) rand.nextInt(1000000);
+        this.randomNum = rand.nextInt(1000000);
     }
 
     public long getHouseId() {
@@ -63,4 +68,8 @@ public class Household implements Serializable {
     public void setVillageName(String _villageName) {this.villageName = _villageName;}
     public String getSurveyXML() {return surveyXML;}
     public void setSurveyXML(String _surveyXML) {this.surveyXML = _surveyXML;}
+    public int getRandomNum() {return randomNum;}
+    public void setRandomNum(int _randomNum) {this.randomNum = _randomNum;}
+    //public String getUniqueID() {return uID;}
+    //public void setUniqueID(String _uID) {this.uID = _uID;}
 }

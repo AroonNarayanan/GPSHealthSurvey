@@ -17,7 +17,8 @@ public class HouseholdDataSource {
     private HealthSurveyDbHelper dbHelper;
     private String[] allColumns = { HealthSurveyDbHelper.HOUSEHOLD_COLUMN_HOUSEID, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_DESCRIPTION,
             HealthSurveyDbHelper.HOUSEHOLD_COLUMN_LATITUDE, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_LONGITUDE,
-            HealthSurveyDbHelper.HOUSEHOLD_COLUMN_VILLAGE, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_SURVEYXML };
+            HealthSurveyDbHelper.HOUSEHOLD_COLUMN_VILLAGE, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_SURVEYXML,
+            HealthSurveyDbHelper.HOUSEHOLD_COLUMN_RANDNUM };
 
     public HouseholdDataSource(Context context) {
         dbHelper = new HealthSurveyDbHelper(context);
@@ -38,6 +39,7 @@ public class HouseholdDataSource {
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_LONGITUDE, newHouse.getLongitude());
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_VILLAGE, newHouse.getVillageName());
         values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_SURVEYXML, newHouse.getSurveyXML());
+        values.put(HealthSurveyDbHelper.HOUSEHOLD_COLUMN_RANDNUM, newHouse.getRandomNum());
         long insertId = database.insert(HealthSurveyDbHelper.HOUSEHOLD_TABLE_NAME, null, values);
         Cursor cursor = database.query(HealthSurveyDbHelper.HOUSEHOLD_TABLE_NAME, allColumns, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_HOUSEID + " = " + insertId, null, null, null, null);
         cursor.moveToFirst();
@@ -54,6 +56,7 @@ public class HouseholdDataSource {
         household.setLongitude(cursor.getDouble(3));
         household.setVillageName(cursor.getString(4));
         household.setSurveyXML(cursor.getString(5));
+        household.setRandomNum(cursor.getInt(6));
         return household;
     }
 
@@ -89,7 +92,25 @@ public class HouseholdDataSource {
             households.add(household);
             cursor.moveToNext();
         }
-        cursor.close();;
+        cursor.close();
+        return households;
+    }
+
+    // create method to select random households
+    public ArrayList<Household> getRandomHouseholds(int numHouseholds) {
+        ArrayList<Household> households = new ArrayList<>();
+
+        String limitString = Integer.toString(numHouseholds);
+
+        Cursor cursor = database.query(dbHelper.HOUSEHOLD_TABLE_NAME, allColumns, null, null, null, null, HealthSurveyDbHelper.HOUSEHOLD_COLUMN_RANDNUM, limitString);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Household household = cursorToHousehold(cursor);
+            households.add(household);
+            cursor.moveToNext();
+        }
+        cursor.close();
         return households;
     }
 }

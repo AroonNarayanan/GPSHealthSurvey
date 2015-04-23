@@ -1,25 +1,26 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent" android:gravity="bottom"
     tools:context="com.gpshealthsurvey.gpshealthsurvey.MarkHouse">
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/houseList"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/statusPanel" />
+        android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/statusPanel"
-        android:layout_margin="10dp"
-        android:longClickable="false">
+        android:layout_margin="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,4 +67,4 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-</RelativeLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

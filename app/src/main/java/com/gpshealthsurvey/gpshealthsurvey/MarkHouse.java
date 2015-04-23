@@ -127,6 +127,11 @@ public class MarkHouse extends ActionBarActivity {
             startActivity(markIntent);
         }
 
+        //refresh location
+        if (id == R.id.action_refresh_gps){
+            getLocation();
+        }
+
         return super.onOptionsItemSelected(item);
     }
     @Override
@@ -141,13 +146,6 @@ public class MarkHouse extends ActionBarActivity {
 
 
 
-        LinearLayout statusPanel = (LinearLayout) findViewById(R.id.statusPanel);
-        statusPanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getLocation();
-            }
-        });
 
         //sample list of households
 

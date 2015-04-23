@@ -32,6 +32,7 @@
     <string name="action_load">Load Survey XML</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="refresh_gps">Refresh GPS</string>
     <string-array name="field_types">
         <item>Text</item>
         <item>Number</item>

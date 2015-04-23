@@ -1,7 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.gpshealthsurvey.gpshealthsurvey.MarkHouse">s
+    tools:context="com.gpshealthsurvey.gpshealthsurvey.MarkHouse">
+    <item android:id="@+id/action_refresh_gps" android:title="@string/refresh_gps" android:icon="@drawable/ic_action_place"
+        android:orderInCategory="100" app:showAsAction="ifRoom" />
     <item android:id="@+id/action_mark_house" android:title="@string/mark_place" android:icon="@drawable/ic_action_new"
         android:orderInCategory="100" app:showAsAction="ifRoom" />
+
 </menu>

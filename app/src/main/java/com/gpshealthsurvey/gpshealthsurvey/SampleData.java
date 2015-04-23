@@ -25,6 +25,7 @@ public class SampleData extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 HouseholdDataSource dataSource = new HouseholdDataSource(v.getContext());
+                dataSource.open();
                 int numSamples = Integer.parseInt(sampleSize.getText().toString());
                 ArrayList<Household> households = dataSource.getRandomHouseholds(numSamples);
                 Intent markIntent = new Intent(v.getContext(), MarkHouse.class);

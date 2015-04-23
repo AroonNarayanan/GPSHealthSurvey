@@ -38,11 +38,9 @@ public class MarkHouse extends ActionBarActivity {
             // Pull object passed from previous activity
             Bundle bundle = getIntent().getExtras();
             if (bundle != null){
-            ArrayList<Household> households = (ArrayList<Household>) bundle.get("samples");
+            SampleHouseArray = (ArrayList<Household>) bundle.get("samples");
                 sampledList = true;
-                MenuItem add = (MenuItem) findViewById(R.id.action_mark_house);
-                add.setEnabled(false);
-                HouseAdaptor adaptor = new HouseAdaptor(households);
+                HouseAdaptor adaptor = new HouseAdaptor(SampleHouseArray);
                 ListView houseView = (ListView) findViewById(R.id.houseList);
 
                 houseView.setAdapter(adaptor);
@@ -132,7 +130,7 @@ public class MarkHouse extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_mark_house) {
+        if (id == R.id.action_mark_house & !sampledList) {
             //PULL GPS LOCATION
             locationLIBRARY locLIB = new locationLIBRARY(this);
 

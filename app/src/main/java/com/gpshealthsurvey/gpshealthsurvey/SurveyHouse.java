@@ -179,7 +179,7 @@ public class SurveyHouse extends ActionBarActivity {
                     public void onPictureTaken(byte[] data, Camera camera) {
                         //save file
                         //TODO: put in isolated directory
-                        File photo = new File(getExternalStorageDirectory(), Long.toString(selectedHouse.houseId) + ".jpg");
+                        File photo = new File(getExternalStorageDirectory(), Long.toString(selectedHouse.) + ".jpg");
                         if(photo.exists()){
                             photo.delete();
                         }
